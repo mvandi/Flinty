@@ -57,4 +57,16 @@ namespace fl {
 	#define FL_ASSERT(x, ...)
 #endif
 
-#define BIT(x) 1 << x
+#define BIT(x) (1 << (x))
+
+#define BOOL(x) ((char)(!(!(x))))
+
+#define SET(flags, x) ((flags) |= BIT(x))
+
+#define CLEAR(flags, x) ((flags) &= ~BIT(x))
+
+#define TOGGLE(flags, x) ((flags) ^= BIT(x))
+
+#define CHECK(flags, x) (((flags) >> (x)) & 1)
+
+#define CHANGE(flags, n, x) ((flags) ^= (-BOOL(x) ^ (flags)) & BIT(n))

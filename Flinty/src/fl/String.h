@@ -4,6 +4,7 @@
 #include "fl/Types.h"
 
 #include <string>
+#include <sstream>
 typedef std::string String;
 
 namespace fl {
@@ -45,6 +46,43 @@ namespace fl {
 			return std::to_string(input);
 		}
 	};
+
+    class FL_API BitStringBuilder {
+    private:
+        static const size_t MAX_BYTE_BIT_LENGTH;
+        static const size_t MAX_SHORT_BIT_LENGTH;
+        static const size_t MAX_INT_BIT_LENGTH;
+        static const size_t MAX_LONG_BIT_LENGTH;
+        static const size_t MAX_LONG_LONG_BIT_LENGTH;
+    public:
+        BitStringBuilder& AppendBit(const bool& value);
+
+        BitStringBuilder& AppendByte(const byte& value, const size_t& length = MAX_BYTE_BIT_LENGTH);
+
+        BitStringBuilder& AppendByte(const byte& value, const size_t& start, const size_t& end);
+
+        BitStringBuilder& AppendShort(const short& value, const size_t& length = MAX_SHORT_BIT_LENGTH);
+
+        BitStringBuilder& AppendShort(const short& value, const size_t& start, const size_t& end);
+
+        BitStringBuilder& AppendInt(const int& value, const size_t& length = MAX_INT_BIT_LENGTH);
+
+        BitStringBuilder& AppendInt(const int& value, const size_t& start, const size_t& end);
+
+        BitStringBuilder& AppendLong(const long& value, const size_t& length = MAX_LONG_BIT_LENGTH);
+
+        BitStringBuilder& AppendLong(const long& value, const size_t& start, const size_t& end);
+
+        BitStringBuilder& AppendLongLong(const long long& value, const size_t& length = MAX_LONG_LONG_BIT_LENGTH);
+
+        BitStringBuilder& AppendLongLong(const long long& value, const size_t& start, const size_t& end);
+
+        String ToString(void) const;
+    private:
+        std::stringstream m_Buffer;
+
+        BitStringBuilder& AppendBits(const long long& value, const size_t& start, const size_t& end, const size_t& maxLength);
+    };
 
 	std::vector<String> SplitString(const String& string, const String& delimiters);
 	std::vector<String> SplitString(const String& string, const char delimiter);

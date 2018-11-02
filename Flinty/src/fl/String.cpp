@@ -5,6 +5,87 @@ namespace fl {
 
 	char* StringFormat::s_Buffer = new char[STRINGFORMAT_BUFFER_SIZE];
 
+    const size_t BitStringBuilder::MAX_BYTE_BIT_LENGTH = CHAR_BIT;
+    const size_t BitStringBuilder::MAX_SHORT_BIT_LENGTH = sizeof(short) * MAX_BYTE_BIT_LENGTH;
+    const size_t BitStringBuilder::MAX_INT_BIT_LENGTH = sizeof(int) * MAX_BYTE_BIT_LENGTH;
+    const size_t BitStringBuilder::MAX_LONG_BIT_LENGTH = sizeof(long) * MAX_BYTE_BIT_LENGTH;
+    const size_t BitStringBuilder::MAX_LONG_LONG_BIT_LENGTH = sizeof(long long) * MAX_BYTE_BIT_LENGTH;
+
+    BitStringBuilder& BitStringBuilder::AppendBit(const bool& value)
+    {
+        m_Buffer << value;
+        return *this;
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendByte(const byte& value, const size_t& length)
+    {
+        return AppendByte(value, 0, length);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendByte(const byte& value, const size_t& start, const size_t& end)
+    {
+        return AppendBits(value, start, end, MAX_BYTE_BIT_LENGTH);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendShort(const short& value, const size_t& length)
+    {
+        return AppendShort(value, 0, length);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendShort(const short& value, const size_t& start, const size_t& end)
+    {
+        return AppendBits(value, start, end, MAX_SHORT_BIT_LENGTH);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendInt(const int& value, const size_t& length)
+    {
+        return AppendInt(value, 0, length);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendInt(const int& value, const size_t& start, const size_t& end)
+    {
+        return AppendBits(value, start, end, MAX_INT_BIT_LENGTH);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendLong(const long& value, const size_t& length)
+    {
+        return AppendLong(value, 0, length);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendLong(const long& value, const size_t& start, const size_t& end)
+    {
+        return AppendBits(value, start, end, MAX_LONG_BIT_LENGTH);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendLongLong(const long long& value, const size_t& length)
+    {
+        return AppendLongLong(value, 0, length);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendLongLong(const long long& value, const size_t& start, const size_t& end)
+    {
+        return AppendBits(value, start, end, MAX_LONG_LONG_BIT_LENGTH);
+    }
+
+    String BitStringBuilder::ToString(void) const
+    {
+        return m_Buffer.str();
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendBits(const long long& value, const size_t& start, const size_t& end, const size_t& maxLength)
+    {
+        FL_ASSERT(start < end);
+        FL_ASSERT(start >= 0);
+        FL_ASSERT(end <= maxLength);
+
+        for (size_t i = end; i-- > start;)
+        {
+            AppendBit(CHECK(value, i));
+        }
+
+        return *this;
+    }
+
 	std::vector<String> SplitString(const String& string, const String& delimiters)
 	{
 		size_t start = 0;
