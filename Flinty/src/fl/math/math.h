@@ -17,8 +17,8 @@
 #include "Quaternion.h"
 
 namespace fl { namespace math {
-	
-	typedef tvec2<int> ivec2;
-	typedef tvec2<uint> uvec2;
+    
+    typedef tvec2<int> ivec2;
+    typedef tvec2<uint> uvec2;
 
 } }

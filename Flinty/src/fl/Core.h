@@ -2,6 +2,6 @@
 
 namespace fl {
 
-	void FlintyInit();
+    void FlintyInit();
 
 }

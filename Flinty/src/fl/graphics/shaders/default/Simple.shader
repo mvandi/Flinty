@@ -13,13 +13,13 @@ uniform mat4 u_MVP;
 
 out DATA
 {
-	vec2 uv;
+    vec2 uv;
 } vs_out;
 
 void main()
 {
-	gl_Position = u_MVP * position;
-	vs_out.uv = uv;
+    gl_Position = u_MVP * position;
+    vs_out.uv = uv;
 };
 
 #shader fragment
@@ -31,11 +31,11 @@ uniform sampler2D u_Texture;
 
 in DATA
 {
-	vec2 uv;
+    vec2 uv;
 } fs_in;
 
 void main()
 {
-	color = texture(u_Texture, fs_in.uv);
+    color = texture(u_Texture, fs_in.uv);
 };
 )"

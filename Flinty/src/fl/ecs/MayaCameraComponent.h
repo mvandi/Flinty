@@ -4,12 +4,12 @@
 
 namespace fl {
 
-	class MayaCameraComponent : public Component
-	{
-	public:
+    class MayaCameraComponent : public Component
+    {
+    public:
 
-	private:
+    private:
 
-	};
+    };
 
 }

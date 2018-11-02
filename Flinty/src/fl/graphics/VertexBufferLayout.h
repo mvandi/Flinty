@@ -18,70 +18,70 @@
 
 namespace fl {
 
-	struct FL_API VertexBufferElement
-	{
-		std::string name;
-		uint type;
-		uint size;
-		uint count;
-		uint offset;
-		bool normalized;
-	};
+    struct FL_API VertexBufferElement
+    {
+        std::string name;
+        uint type;
+        uint size;
+        uint count;
+        uint offset;
+        bool normalized;
+    };
 
-	class FL_API VertexBufferLayout
-	{
-	public:
-		VertexBufferLayout();
+    class FL_API VertexBufferLayout
+    {
+    public:
+        VertexBufferLayout();
 
-		inline const std::vector<VertexBufferElement>& GetLayout() const { return m_Layout; }
-		inline uint GetStride() const { return m_Size; }
+        inline const std::vector<VertexBufferElement>& GetLayout() const { return m_Layout; }
+        inline uint GetStride() const { return m_Size; }
 
-		template<typename T>
-		void Push(const std::string& name, uint count = 1, bool normalized = false)
-		{
-			FL_ASSERT(false, "Unknown type!");
-		}
+        template<typename T>
+        void Push(const std::string& name, uint count = 1, bool normalized = false)
+        {
+            FL_ASSERT(false, "Unknown type!");
+        }
 
-		template<>
-		void Push<float>(const std::string& name, uint count, bool normalized)
-		{
-			Push(name, GL_FLOAT, sizeof(float), count, normalized);
-		}
+        template<>
+        void Push<float>(const std::string& name, uint count, bool normalized)
+        {
+            Push(name, GL_FLOAT, sizeof(float), count, normalized);
+        }
 
-		template<>
-		void Push<uint>(const std::string& name, uint count, bool normalized)
-		{
-			Push(name, GL_UNSIGNED_INT, sizeof(uint), count, normalized);
-		}
+        template<>
+        void Push<uint>(const std::string& name, uint count, bool normalized)
+        {
+            Push(name, GL_UNSIGNED_INT, sizeof(uint), count, normalized);
+        }
 
-		template<>
-		void Push<byte>(const std::string& name, uint count, bool normalized)
-		{
-			Push(name, GL_UNSIGNED_BYTE, sizeof(byte), count, normalized);
-		}
+        template<>
+        void Push<byte>(const std::string& name, uint count, bool normalized)
+        {
+            Push(name, GL_UNSIGNED_BYTE, sizeof(byte), count, normalized);
+        }
 
-		template<>
-		void Push<math::vec2>(const std::string& name, uint count, bool normalized)
-		{
-			Push(name, GL_FLOAT, sizeof(float), 2 * count, normalized);
-		}
+        template<>
+        void Push<math::vec2>(const std::string& name, uint count, bool normalized)
+        {
+            Push(name, GL_FLOAT, sizeof(float), 2 * count, normalized);
+        }
 
-		template<>
-		void Push<math::vec3>(const std::string& name, uint count, bool normalized)
-		{
-			Push(name, GL_FLOAT, sizeof(float), 3 * count, normalized);
-		}
+        template<>
+        void Push<math::vec3>(const std::string& name, uint count, bool normalized)
+        {
+            Push(name, GL_FLOAT, sizeof(float), 3 * count, normalized);
+        }
 
-		template<>
-		void Push<math::vec4>(const std::string& name, uint count, bool normalized)
-		{
-			Push(name, GL_FLOAT, sizeof(float), 4 * count, normalized);
-		}
-	private:
-		void Push(const std::string& name, uint type, uint size, uint count, bool normalized);
-	private:
-		uint m_Size;
-		std::vector<VertexBufferElement> m_Layout;
-	};
+        template<>
+        void Push<math::vec4>(const std::string& name, uint count, bool normalized)
+        {
+            Push(name, GL_FLOAT, sizeof(float), 4 * count, normalized);
+        }
+    private:
+        void Push(const std::string& name, uint type, uint size, uint count, bool normalized);
+    private:
+        uint m_Size;
+        std::vector<VertexBufferElement> m_Layout;
+    };
 
 }  

@@ -5,7 +5,7 @@
 
 namespace fl { namespace ShaderFactory {
 
-	FL_API Shader* SimpleShader();
-	FL_API Shader* FullScreenQuadShader();
+    FL_API Shader* SimpleShader();
+    FL_API Shader* FullScreenQuadShader();
 
 } }

@@ -6,114 +6,114 @@ namespace fl {
 
 #define LS_BIND_METHOD(method) std::bind(&LayerStack:: ## method, this, std::placeholders::_1)
 
-	LayerStack::LayerStack()
-	{
+    LayerStack::LayerStack()
+    {
 
-	}
+    }
 
-	LayerStack::~LayerStack()
-	{
+    LayerStack::~LayerStack()
+    {
 
-	}
+    }
 
-	void LayerStack::PushLayer(Layer* layer)
-	{
-		m_Layers.push_back(layer);
-		layer->OnInit();
-	}
+    void LayerStack::PushLayer(Layer* layer)
+    {
+        m_Layers.push_back(layer);
+        layer->OnInit();
+    }
 
-	void LayerStack::PopLayer(Layer* layer)
-	{
+    void LayerStack::PopLayer(Layer* layer)
+    {
 
-	}
+    }
 
-	void LayerStack::PushOverlay(Layer* layer)
-	{
-		m_Overlays.push_back(layer);
-		layer->OnInit();
-	}
+    void LayerStack::PushOverlay(Layer* layer)
+    {
+        m_Overlays.push_back(layer);
+        layer->OnInit();
+    }
 
-	void LayerStack::PopOverlay(Layer* layer)
-	{
+    void LayerStack::PopOverlay(Layer* layer)
+    {
 
-	}
+    }
 
-	void LayerStack::DispatchEvent(Event& event)
-	{
-		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<AppTickEvent>(LS_BIND_METHOD(OnTickEvent));
-		dispatcher.Dispatch<AppUpdateEvent>(LS_BIND_METHOD(OnUpdateEvent));
-		dispatcher.Dispatch<AppRenderEvent>(LS_BIND_METHOD(OnRenderEvent));
+    void LayerStack::DispatchEvent(Event& event)
+    {
+        EventDispatcher dispatcher(event);
+        dispatcher.Dispatch<AppTickEvent>(LS_BIND_METHOD(OnTickEvent));
+        dispatcher.Dispatch<AppUpdateEvent>(LS_BIND_METHOD(OnUpdateEvent));
+        dispatcher.Dispatch<AppRenderEvent>(LS_BIND_METHOD(OnRenderEvent));
 
-		OnEvent(event);
-	}
+        OnEvent(event);
+    }
 
-	bool LayerStack::OnTickEvent(AppTickEvent& event)
-	{
-		for (uint i = 0; i < m_Overlays.size(); i++)
-		{
-			Layer* layer = m_Overlays[i];
-			layer->OnTick();
-		}
+    bool LayerStack::OnTickEvent(AppTickEvent& event)
+    {
+        for (uint i = 0; i < m_Overlays.size(); i++)
+        {
+            Layer* layer = m_Overlays[i];
+            layer->OnTick();
+        }
 
-		for (uint i = 0; i < m_Layers.size(); i++)
-		{
-			Layer* layer = m_Layers[i];
-			layer->OnTick();
-		}
+        for (uint i = 0; i < m_Layers.size(); i++)
+        {
+            Layer* layer = m_Layers[i];
+            layer->OnTick();
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	bool LayerStack::OnUpdateEvent(AppUpdateEvent& event)
-	{
-		for (uint i = 0; i < m_Overlays.size(); i++)
-		{
-			Layer* layer = m_Overlays[i];
-			layer->OnUpdate();
-		}
+    bool LayerStack::OnUpdateEvent(AppUpdateEvent& event)
+    {
+        for (uint i = 0; i < m_Overlays.size(); i++)
+        {
+            Layer* layer = m_Overlays[i];
+            layer->OnUpdate();
+        }
 
-		for (uint i = 0; i < m_Layers.size(); i++)
-		{
-			Layer* layer = m_Layers[i];
-			layer->OnUpdate();
-		}
+        for (uint i = 0; i < m_Layers.size(); i++)
+        {
+            Layer* layer = m_Layers[i];
+            layer->OnUpdate();
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	bool LayerStack::OnRenderEvent(AppRenderEvent& event)
-	{
-		for (uint i = 0; i < m_Overlays.size(); i++)
-		{
-			Layer* layer = m_Overlays[i];
-			layer->OnRender();
-		}
+    bool LayerStack::OnRenderEvent(AppRenderEvent& event)
+    {
+        for (uint i = 0; i < m_Overlays.size(); i++)
+        {
+            Layer* layer = m_Overlays[i];
+            layer->OnRender();
+        }
 
-		for (uint i = 0; i < m_Layers.size(); i++)
-		{
-			Layer* layer = m_Layers[i];
-			layer->OnRender();
-		}
+        for (uint i = 0; i < m_Layers.size(); i++)
+        {
+            Layer* layer = m_Layers[i];
+            layer->OnRender();
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	bool LayerStack::OnEvent(Event& event)
-	{
-		for (uint i = 0; i < m_Overlays.size(); i++)
-		{
-			Layer* layer = m_Overlays[i];
-			layer->OnEvent(event);
-		}
+    bool LayerStack::OnEvent(Event& event)
+    {
+        for (uint i = 0; i < m_Overlays.size(); i++)
+        {
+            Layer* layer = m_Overlays[i];
+            layer->OnEvent(event);
+        }
 
-		for (uint i = 0; i < m_Layers.size(); i++)
-		{
-			Layer* layer = m_Layers[i];
-			layer->OnEvent(event);
-		}
+        for (uint i = 0; i < m_Layers.size(); i++)
+        {
+            Layer* layer = m_Layers[i];
+            layer->OnEvent(event);
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 }

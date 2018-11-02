@@ -5,28 +5,28 @@
 
 namespace fl {
 
-	void FlintyInit()
-	{
-	}
+    void FlintyInit()
+    {
+    }
 
-	inline GLenum GLCheckError()
-	{
-		return glGetError();
-	}
+    inline GLenum GLCheckError()
+    {
+        return glGetError();
+    }
 
-	void GLClearError()
-	{
-		GLCheckError();
-	}
+    void GLClearError()
+    {
+        GLCheckError();
+    }
 
-	bool GLLogCall(const char* function, const char* file, int line)
-	{
-		while (GLenum error = GLCheckError())
-		{
-			std::cout << "[OpenGL Error] (" << error << "): " << function << " " << file <<  ":" << line << std::endl;
-			return false;
-		}
-		return true;
-	}
+    bool GLLogCall(const char* function, const char* file, int line)
+    {
+        while (GLenum error = GLCheckError())
+        {
+            std::cout << "[OpenGL Error] (" << error << "): " << function << " " << file <<  ":" << line << std::endl;
+            return false;
+        }
+        return true;
+    }
 
 }

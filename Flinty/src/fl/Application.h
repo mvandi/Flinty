@@ -8,53 +8,53 @@
 
 namespace fl {
 
-	class FL_API Application
-	{
-	public:
-		Application(const std::string& name);
-		virtual ~Application();
+    class FL_API Application
+    {
+    public:
+        Application(const std::string& name);
+        virtual ~Application();
 
-		void Start();
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* layer);
+        void Start();
+        void PushLayer(Layer* layer);
+        void PushOverlay(Layer* layer);
 
-		virtual void OnInit() {}
+        virtual void OnInit() {}
 
-		// OnTick() is called once per second
-		virtual void OnTick() {}
-		
-		// OnUpdate() is called at a fixed time interval, usually 60 times per second
-		virtual void OnUpdate() {}
+        // OnTick() is called once per second
+        virtual void OnTick() {}
+        
+        // OnUpdate() is called at a fixed time interval, usually 60 times per second
+        virtual void OnUpdate() {}
 
-		// OnRender() is called whenever a render is requested, usually at vsync
-		virtual void OnRender() {}
+        // OnRender() is called whenever a render is requested, usually at vsync
+        virtual void OnRender() {}
 
-		inline const std::string& GetName() const { return m_Name; }
+        inline const std::string& GetName() const { return m_Name; }
 
-		// TODO: Move these into DisplayDevice class
-		inline int GetWidth() { return m_Window->GetWidth(); }
-		inline int GetHeight() { return m_Window->GetHeight(); }
+        // TODO: Move these into DisplayDevice class
+        inline int GetWidth() { return m_Window->GetWidth(); }
+        inline int GetHeight() { return m_Window->GetHeight(); }
 
-		inline LayerStack& GetLayerStack() { return m_LayerStack; }
+        inline LayerStack& GetLayerStack() { return m_LayerStack; }
 
-		inline static Application& Get() { return *s_Instance; }
-	private:
-		void RunLoop();
+        inline static Application& Get() { return *s_Instance; }
+    private:
+        void RunLoop();
 
-		void DispatchEvent(Event& event);
+        void DispatchEvent(Event& event);
 
-		bool OnTickEvent(AppTickEvent& event);
-		bool OnUpdateEvent(AppUpdateEvent& event);
-		bool OnRenderEvent(AppRenderEvent& event);
-		bool OnWindowClosedEvent(WindowClosedEvent& event);
-	private:
-		std::unique_ptr<Window> m_Window;
-		std::string m_Name;
-		bool m_Running;
-		float m_FrameTime;
-		LayerStack m_LayerStack;
-	private:
-		static Application* s_Instance;
-	};
+        bool OnTickEvent(AppTickEvent& event);
+        bool OnUpdateEvent(AppUpdateEvent& event);
+        bool OnRenderEvent(AppRenderEvent& event);
+        bool OnWindowClosedEvent(WindowClosedEvent& event);
+    private:
+        std::unique_ptr<Window> m_Window;
+        std::string m_Name;
+        bool m_Running;
+        float m_FrameTime;
+        LayerStack m_LayerStack;
+    private:
+        static Application* s_Instance;
+    };
 
 }

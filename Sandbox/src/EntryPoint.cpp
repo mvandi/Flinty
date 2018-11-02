@@ -11,20 +11,20 @@ using namespace fl;
 class Sandbox : public Application
 {
 public:
-	Sandbox()
-		: Application("Sandbox")
-	{
-		Start();
-	}
+    Sandbox()
+        : Application("Sandbox")
+    {
+        Start();
+    }
 
-	void OnInit() override
-	{
-		PushLayer(new SceneLayer());
-		PushOverlay(new debug::ImGuiLayer());
-	}
+    void OnInit() override
+    {
+        PushLayer(new SceneLayer());
+        PushOverlay(new debug::ImGuiLayer());
+    }
 };
 
 int main()
 {
-	Sandbox sandbox;
+    Sandbox sandbox;
 }

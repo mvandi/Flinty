@@ -5,23 +5,23 @@
 class SceneLayer : public fl::Layer
 {
 public:
-	SceneLayer();
-	~SceneLayer();
+    SceneLayer();
+    ~SceneLayer();
 
-	void OnInit() override;
+    void OnInit() override;
 
-	void OnTick() override;
-	void OnUpdate() override;
-	void OnRender() override;
+    void OnTick() override;
+    void OnUpdate() override;
+    void OnRender() override;
 private:
-	fl::Shader* m_Shader;
-	fl::Shader* m_FullScreenQuadShader;
-	fl::Framebuffer2D* m_Framebuffer;
-	fl::Texture2D* m_RandTexture;
+    fl::Shader* m_Shader;
+    fl::Shader* m_FullScreenQuadShader;
+    fl::Framebuffer2D* m_Framebuffer;
+    fl::Texture2D* m_RandTexture;
 
-	fl::VertexArray* m_VertexArray;
-	fl::VertexBuffer* m_VertexBuffer;
-	fl::IndexBuffer* m_IndexBuffer;
+    fl::VertexArray* m_VertexArray;
+    fl::VertexBuffer* m_VertexBuffer;
+    fl::IndexBuffer* m_IndexBuffer;
 
-	fl::MayaCamera m_Camera;
+    fl::MayaCamera m_Camera;
 };

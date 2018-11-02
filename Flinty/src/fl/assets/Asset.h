@@ -4,14 +4,14 @@
 
 namespace fl {
 
-	class FL_API Asset
-	{
-	protected:
-		Asset() {}
-		virtual ~Asset() {}
+    class FL_API Asset
+    {
+    protected:
+        Asset() {}
+        virtual ~Asset() {}
 
-		unsigned int GetGUID() { return 0; }
-	};
+        unsigned int GetGUID() { return 0; }
+    };
 
 
 }

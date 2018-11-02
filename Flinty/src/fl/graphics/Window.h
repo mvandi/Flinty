@@ -14,62 +14,62 @@ struct GLFWwindow;
 
 namespace fl {
 
-	typedef std::function<void()> UpdateCallback;
-	typedef std::function<void(Renderer&)> RenderCallback;
-	typedef std::function<void(int, int)> KeyCallback;
-	typedef std::function<void(int, int)> ResizeCallback;
-	typedef std::function<void(Event&)> EventCallback;
+    typedef std::function<void()> UpdateCallback;
+    typedef std::function<void(Renderer&)> RenderCallback;
+    typedef std::function<void(int, int)> KeyCallback;
+    typedef std::function<void(int, int)> ResizeCallback;
+    typedef std::function<void(Event&)> EventCallback;
 
-	class FL_API Window
-	{
-	private:
-		String m_Title;
-		uint m_Width, m_Height;
-		GLFWwindow* m_GLFWWindow;
-		UpdateCallback m_OnUpdate;
-		RenderCallback m_OnRender;
-		KeyCallback m_KeyCallback;
-		EventCallback m_EventCallback;
-		ResizeCallback m_ResizeCallback;
-		std::thread m_GraphicsThread;
-		Renderer* m_Renderer;
-		InputManager* m_InputManager;
+    class FL_API Window
+    {
+    private:
+        String m_Title;
+        uint m_Width, m_Height;
+        GLFWwindow* m_GLFWWindow;
+        UpdateCallback m_OnUpdate;
+        RenderCallback m_OnRender;
+        KeyCallback m_KeyCallback;
+        EventCallback m_EventCallback;
+        ResizeCallback m_ResizeCallback;
+        std::thread m_GraphicsThread;
+        Renderer* m_Renderer;
+        InputManager* m_InputManager;
 
-		float m_FrameTime;
-	public:
-		Window(const String& title, uint width, uint height);
-		~Window();
+        float m_FrameTime;
+    public:
+        Window(const String& title, uint width, uint height);
+        ~Window();
 
-		void Init();
+        void Init();
 
-		void ProcessEvents();
-		void SwapBuffers();
-		void Destroy();
+        void ProcessEvents();
+        void SwapBuffers();
+        void Destroy();
 
-		inline void SetEventCallback(const EventCallback& callback) { m_EventCallback = callback; }
-		inline void SetUpdateCallback(const UpdateCallback& callback) { m_OnUpdate = callback; }
-		inline void SetRenderCallback(const RenderCallback& callback) { m_OnRender = callback; }
-		inline void SetKeyCallback(const KeyCallback& callback) { m_KeyCallback = callback; }
-		inline void SetResizeCallback(const ResizeCallback& callback) { m_ResizeCallback = callback; }
+        inline void SetEventCallback(const EventCallback& callback) { m_EventCallback = callback; }
+        inline void SetUpdateCallback(const UpdateCallback& callback) { m_OnUpdate = callback; }
+        inline void SetRenderCallback(const RenderCallback& callback) { m_OnRender = callback; }
+        inline void SetKeyCallback(const KeyCallback& callback) { m_KeyCallback = callback; }
+        inline void SetResizeCallback(const ResizeCallback& callback) { m_ResizeCallback = callback; }
 
-		inline float GetFrameTime() const { return m_FrameTime; }
+        inline float GetFrameTime() const { return m_FrameTime; }
 
-		inline uint GetWidth() const { return m_Width; }
-		inline uint GetHeight() const { return m_Height; }
-	private:
-		void Clear();
+        inline uint GetWidth() const { return m_Width; }
+        inline uint GetHeight() const { return m_Height; }
+    private:
+        void Clear();
 
-		void DispatchEvent(Event& event);
+        void DispatchEvent(Event& event);
 
-		friend void GLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-		friend void GLFWWindowSizeCallback(GLFWwindow* window, int width, int height);
-		friend void GLFWMouseButtonCallback(GLFWwindow* glfwWindow, int button, int action, int mods);
-		friend void GLFWMousePositionCallback(GLFWwindow* glfwWindow, double xpos, double ypos);
-	};
+        friend void GLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+        friend void GLFWWindowSizeCallback(GLFWwindow* window, int width, int height);
+        friend void GLFWMouseButtonCallback(GLFWwindow* glfwWindow, int button, int action, int mods);
+        friend void GLFWMousePositionCallback(GLFWwindow* glfwWindow, double xpos, double ypos);
+    };
 
 #define FL_KEY_RELEASED 0
-#define FL_KEY_PRESSED	1
-#define FL_KEY_REPEAT	2
+#define FL_KEY_PRESSED    1
+#define FL_KEY_REPEAT    2
 
 #define FL_KEY_SPACE              32
 #define FL_KEY_APOSTROPHE         39  /* ' */
