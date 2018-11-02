@@ -57,9 +57,9 @@ namespace fl {
     public:
         BitStringBuilder& AppendBit(const bool& value);
 
-        BitStringBuilder& AppendByte(const byte& value, const size_t& length = MAX_BYTE_BIT_LENGTH);
+        BitStringBuilder& AppendByte(const char& value, const size_t& length = MAX_BYTE_BIT_LENGTH);
 
-        BitStringBuilder& AppendByte(const byte& value, const size_t& start, const size_t& end);
+        BitStringBuilder& AppendByte(const char& value, const size_t& start, const size_t& end);
 
         BitStringBuilder& AppendShort(const short& value, const size_t& length = MAX_SHORT_BIT_LENGTH);
 
