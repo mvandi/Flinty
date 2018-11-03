@@ -5,11 +5,21 @@ namespace fl {
 
     char* StringFormat::s_Buffer = new char[STRINGFORMAT_BUFFER_SIZE];
 
-    const size_t BitStringBuilder::MAX_BYTE_BIT_LENGTH = sizeof(char) * CHAR_BIT;
-    const size_t BitStringBuilder::MAX_SHORT_BIT_LENGTH = sizeof(short) * MAX_BYTE_BIT_LENGTH;
-    const size_t BitStringBuilder::MAX_INT_BIT_LENGTH = sizeof(int) * MAX_BYTE_BIT_LENGTH;
-    const size_t BitStringBuilder::MAX_LONG_BIT_LENGTH = sizeof(long) * MAX_BYTE_BIT_LENGTH;
-    const size_t BitStringBuilder::MAX_LONG_LONG_BIT_LENGTH = sizeof(long long) * MAX_BYTE_BIT_LENGTH;
+    const size_t BitStringBuilder::MAX_INT8_BIT_LENGTH  = sizeof(int8) * CHAR_BIT;
+    const size_t BitStringBuilder::MAX_INT16_BIT_LENGTH = sizeof(int16) * MAX_INT8_BIT_LENGTH;
+    const size_t BitStringBuilder::MAX_INT_BIT_LENGTH   = sizeof(int) * MAX_INT8_BIT_LENGTH;
+    const size_t BitStringBuilder::MAX_INT32_BIT_LENGTH = sizeof(int32) * MAX_INT8_BIT_LENGTH;
+    const size_t BitStringBuilder::MAX_INT64_BIT_LENGTH = sizeof(int64) * MAX_INT8_BIT_LENGTH;
+
+    BitStringBuilder::BitStringBuilder(void)
+    {
+    }
+
+    BitStringBuilder::~BitStringBuilder(void)
+    {
+        m_Buffer.str("");
+        m_Buffer.clear();
+    }
 
     BitStringBuilder& BitStringBuilder::AppendBit(const bool& value)
     {
@@ -17,24 +27,30 @@ namespace fl {
         return *this;
     }
 
-    BitStringBuilder& BitStringBuilder::AppendByte(const char& value, const size_t& length)
+    BitStringBuilder& BitStringBuilder::AppendBits(const BitStringBuilder& other)
     {
-        return AppendByte(value, 0, length);
+        m_Buffer << other.ToString();
+        return *this;
     }
 
-    BitStringBuilder& BitStringBuilder::AppendByte(const char& value, const size_t& start, const size_t& end)
+    BitStringBuilder& BitStringBuilder::AppendInt8(const int8& value, const size_t& length)
     {
-        return AppendBits(value, start, end, MAX_BYTE_BIT_LENGTH);
+        return AppendInt8(value, 0, length);
     }
 
-    BitStringBuilder& BitStringBuilder::AppendShort(const short& value, const size_t& length)
+    BitStringBuilder& BitStringBuilder::AppendInt8(const int8& value, const size_t& start, const size_t& end)
     {
-        return AppendShort(value, 0, length);
+        return AppendBits(value, start, end, MAX_INT8_BIT_LENGTH);
     }
 
-    BitStringBuilder& BitStringBuilder::AppendShort(const short& value, const size_t& start, const size_t& end)
+    BitStringBuilder& BitStringBuilder::AppendInt16(const int16& value, const size_t& length)
     {
-        return AppendBits(value, start, end, MAX_SHORT_BIT_LENGTH);
+        return AppendInt16(value, 0, length);
+    }
+
+    BitStringBuilder& BitStringBuilder::AppendInt16(const int16& value, const size_t& start, const size_t& end)
+    {
+        return AppendBits(value, start, end, MAX_INT16_BIT_LENGTH);
     }
 
     BitStringBuilder& BitStringBuilder::AppendInt(const int& value, const size_t& length)
@@ -47,24 +63,24 @@ namespace fl {
         return AppendBits(value, start, end, MAX_INT_BIT_LENGTH);
     }
 
-    BitStringBuilder& BitStringBuilder::AppendLong(const long& value, const size_t& length)
+    BitStringBuilder& BitStringBuilder::AppendInt32(const int32& value, const size_t& length)
     {
-        return AppendLong(value, 0, length);
+        return AppendInt32(value, 0, length);
     }
 
-    BitStringBuilder& BitStringBuilder::AppendLong(const long& value, const size_t& start, const size_t& end)
+    BitStringBuilder& BitStringBuilder::AppendInt32(const int32& value, const size_t& start, const size_t& end)
     {
-        return AppendBits(value, start, end, MAX_LONG_BIT_LENGTH);
+        return AppendBits(value, start, end, MAX_INT32_BIT_LENGTH);
     }
 
-    BitStringBuilder& BitStringBuilder::AppendLongLong(const long long& value, const size_t& length)
+    BitStringBuilder& BitStringBuilder::AppendInt64(const int64& value, const size_t& length)
     {
-        return AppendLongLong(value, 0, length);
+        return AppendInt64(value, 0, length);
     }
 
-    BitStringBuilder& BitStringBuilder::AppendLongLong(const long long& value, const size_t& start, const size_t& end)
+    BitStringBuilder& BitStringBuilder::AppendInt64(const int64& value, const size_t& start, const size_t& end)
     {
-        return AppendBits(value, start, end, MAX_LONG_LONG_BIT_LENGTH);
+        return AppendBits(value, start, end, MAX_INT64_BIT_LENGTH);
     }
 
     String BitStringBuilder::ToString(void) const
@@ -72,7 +88,7 @@ namespace fl {
         return m_Buffer.str();
     }
 
-    BitStringBuilder& BitStringBuilder::AppendBits(const long long& value, const size_t& start, const size_t& end, const size_t& maxLength)
+    BitStringBuilder& BitStringBuilder::AppendBits(const int64& value, const size_t& start, const size_t& end, const size_t& maxLength)
     {
         FL_ASSERT(start < end);
         FL_ASSERT(start >= 0);

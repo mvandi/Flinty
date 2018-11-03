@@ -49,39 +49,48 @@ namespace fl {
 
     class FL_API BitStringBuilder {
     private:
-        static const size_t MAX_BYTE_BIT_LENGTH;
-        static const size_t MAX_SHORT_BIT_LENGTH;
+        static const size_t MAX_INT8_BIT_LENGTH;
+        static const size_t MAX_INT16_BIT_LENGTH;
         static const size_t MAX_INT_BIT_LENGTH;
-        static const size_t MAX_LONG_BIT_LENGTH;
-        static const size_t MAX_LONG_LONG_BIT_LENGTH;
+        static const size_t MAX_INT32_BIT_LENGTH;
+        static const size_t MAX_INT64_BIT_LENGTH;
     public:
+        BitStringBuilder(void);
+
+        virtual ~BitStringBuilder(void);
+
+        BitStringBuilder(const BitStringBuilder& other) = delete;
+        BitStringBuilder& operator=(const BitStringBuilder& other) = delete;
+
         BitStringBuilder& AppendBit(const bool& value);
 
-        BitStringBuilder& AppendByte(const char& value, const size_t& length = MAX_BYTE_BIT_LENGTH);
+        BitStringBuilder& AppendBits(const BitStringBuilder& other);
 
-        BitStringBuilder& AppendByte(const char& value, const size_t& start, const size_t& end);
+        BitStringBuilder& AppendInt8(const int8& value, const size_t& length = MAX_INT8_BIT_LENGTH);
 
-        BitStringBuilder& AppendShort(const short& value, const size_t& length = MAX_SHORT_BIT_LENGTH);
+        BitStringBuilder& AppendInt8(const int8& value, const size_t& start, const size_t& end);
 
-        BitStringBuilder& AppendShort(const short& value, const size_t& start, const size_t& end);
+        BitStringBuilder& AppendInt16(const int16& value, const size_t& length = MAX_INT16_BIT_LENGTH);
+
+        BitStringBuilder& AppendInt16(const int16& value, const size_t& start, const size_t& end);
 
         BitStringBuilder& AppendInt(const int& value, const size_t& length = MAX_INT_BIT_LENGTH);
 
         BitStringBuilder& AppendInt(const int& value, const size_t& start, const size_t& end);
 
-        BitStringBuilder& AppendLong(const long& value, const size_t& length = MAX_LONG_BIT_LENGTH);
+        BitStringBuilder& AppendInt32(const int32& value, const size_t& length = MAX_INT32_BIT_LENGTH);
 
-        BitStringBuilder& AppendLong(const long& value, const size_t& start, const size_t& end);
+        BitStringBuilder& AppendInt32(const int32& value, const size_t& start, const size_t& end);
 
-        BitStringBuilder& AppendLongLong(const long long& value, const size_t& length = MAX_LONG_LONG_BIT_LENGTH);
+        BitStringBuilder& AppendInt64(const int64& value, const size_t& length = MAX_INT64_BIT_LENGTH);
 
-        BitStringBuilder& AppendLongLong(const long long& value, const size_t& start, const size_t& end);
+        BitStringBuilder& AppendInt64(const int64& value, const size_t& start, const size_t& end);
 
         String ToString(void) const;
     private:
         std::stringstream m_Buffer;
 
-        BitStringBuilder& AppendBits(const long long& value, const size_t& start, const size_t& end, const size_t& maxLength);
+        BitStringBuilder& AppendBits(const int64& value, const size_t& start, const size_t& end, const size_t& maxLength);
     };
 
     std::vector<String> SplitString(const String& string, const String& delimiters);
